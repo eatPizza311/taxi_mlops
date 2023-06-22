@@ -1,4 +1,11 @@
+# Big files
 *.parquet
 *.pkl
+
+# Editors
 .vscode
-mlruns
+
+# MLflow
+*mlruns*
+*models*
+*mlflow.db*
