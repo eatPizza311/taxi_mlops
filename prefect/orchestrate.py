@@ -116,8 +116,8 @@ def main_flow():
     mlflow.set_experiment("nyc-taxi-experiment")
 
     # Load
-    train_path = "../data/green_jan.parquet"
-    val_path = "../data/green_feb.parquet"
+    train_path = "./data/green_jan.parquet"
+    val_path = "./data/green_feb.parquet"
     df_train = read_data(train_path)
     df_val = read_data(val_path)
 

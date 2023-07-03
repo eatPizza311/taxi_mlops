@@ -14,10 +14,8 @@ push:
 
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
-- prefect.deployments.steps.git_clone:
-    repository: https://github.com/eatPizza311/taxi_mlops.git
-    branch: main
-    access_token:
+- prefect.deployments.steps.set_working_directory:
+    directory: /home/ubuntu/taxi_mlops
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
@@ -33,7 +31,7 @@ deployments:
     name:
     work_queue_name:
     job_variables: {}
-- name: taxi-mlops
+- name: taxi-deployment
   version:
   tags: []
   description: The main training pipline
