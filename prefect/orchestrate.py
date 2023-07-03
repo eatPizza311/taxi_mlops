@@ -107,19 +107,9 @@ def train_best_model(
         mlflow.log_artifact(model_path / "preprocessor.b", artifact_path="preprocessor")
         mlflow.xgboost.log_model(booster, artifact_path="models_mlflow")
 
-@click.command()
-@click.option(
-    "--train_path",
-    default="./data/green_jan.parquet",
-    help="Location where the training data is.",
-)
-@click.option(
-    "--val_path",
-    default="./data/green_feb.parquet",
-    help="Location where the validation data is.",
-)
+
 @flow
-def main_flow(train_path: str, val_path: str):
+def main_flow():
     """The main training pipline"""
     # MLflow settings
 
@@ -127,6 +117,8 @@ def main_flow(train_path: str, val_path: str):
     mlflow.set_experiment("nyc-taxi-experiment")
 
     # Load
+    train_path = "./data/green_jan.parquet"
+    val_path = "./data/green_feb.parquet"
     df_train = read_data(train_path)
     df_val = read_data(val_path)
 
