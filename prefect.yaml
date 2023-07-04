@@ -30,7 +30,7 @@ deployments:
     work_queue_name:
     job_variables: {}
   schedule:
-- name: taxi-deployment_s3
+- name: taxi-deployment-s3
   version:
   tags: []
   description: The main training pipline
