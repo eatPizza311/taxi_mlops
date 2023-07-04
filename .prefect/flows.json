@@ -1,3 +1,4 @@
 {
-  "main-flow": "prefect/orchestrate.py:main_flow"
+  "main-flow": "prefect/orchestrate.py:main_flow",
+  "main-flow-s3": "prefect/orchestrate_s3.py:main_flow_s3"
 }
