@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 
 app = Flask("duration-prediction")
 
-with open("../models/lin_reg.bin", "rb") as f_in:
+with open("lin_reg.bin", "rb") as f_in:
     dv, model = pickle.load(f_in)
 
 
@@ -29,6 +29,11 @@ def predict_endpoint():
 
     result = {"duration": pred}
     return jsonify(result)
+
+
+@app.route("/", methods=["GET"])
+def index():
+    return "The server is running!"
 
 
 if __name__ == "__main__":
