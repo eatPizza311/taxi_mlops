@@ -8,6 +8,8 @@ scikit-learn = "==1.2.2"
 pandas = "*"
 mlflow = "==2.4"
 boto3 = "*"
+s3fs = "*"
+prefect = "*"
 
 [dev-packages]
 ipykernel = "*"
