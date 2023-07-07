@@ -9,16 +9,15 @@ tqdm = "*"
 requests = "*"
 joblib = "*"
 pyarrow = "*"
-psycopg = "*"
-psycopg-binary = "*"
 evidently = "*"
 pandas = "*"
 numpy = "*"
 scikit-learn = "*"
-jupyter = "*"
 matplotlib = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
+ipykernel = "*"
 
 [requires]
 python_version = "3.9"
