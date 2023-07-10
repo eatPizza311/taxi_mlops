@@ -123,17 +123,17 @@ python test.py
 docker build -t stream-model-duration:v1 .
 
 docker run -it --rm \
-    -p 8080:8080 \
-    -e PREDICTIONS_STREAM_NAME="ride_predictions" \
-    -e RUN_ID="e1efc53e9bd149078b0c12aeaa6365df" \
+    -p 8888:8080 \
+    -e PREDICTIONS_STREAM_NAME="ride-predictions" \
+    -e RUN_ID="95c848791a7642ff8c26794d43e410a8" \
     -e TEST_RUN="True" \
-    -e AWS_DEFAULT_REGION="eu-west-1" \
+    -e AWS_DEFAULT_REGION="ap-southeast-1" \
     stream-model-duration:v1
 ```
 
 URL for testing:
 
-* http://localhost:8080/2015-03-31/functions/function/invocations
+* http://localhost:8888/2015-03-31/functions/function/invocations
 
 
 
