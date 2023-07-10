@@ -111,7 +111,7 @@ echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode | jq
 
 ```bash
 export PREDICTIONS_STREAM_NAME="ride_predictions"
-export RUN_ID="e1efc53e9bd149078b0c12aeaa6365df"
+export RUN_ID="95c848791a7642ff8c26794d43e410a8"
 export TEST_RUN="True"
 
 python test.py
