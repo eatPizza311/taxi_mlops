@@ -81,7 +81,7 @@ See [AWS CLI V2 "AWS firehose put-record" complaining about Invalid base64:](htt
             "eventName": "aws:kinesis:record",
             "invokeIdentityArn": "arn:aws:iam::XXXXXXXXX:role/lambda-kinesis-role",
             "awsRegion": "eu-west-1",
-            "eventSourceARN": "arn:aws:kinesis:eu-west-1:XXXXXXXXX:stream/ride_events"
+            "eventSourceARN": "arn:aws:kinesis:eu-west-1:XXXXXXXXX:stream/ride-events"
         }
     ]
 }
@@ -110,7 +110,7 @@ echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode | jq
 ### Running the test
 
 ```bash
-export PREDICTIONS_STREAM_NAME="ride_predictions"
+export PREDICTIONS_STREAM_NAME="ride-predictions"
 export RUN_ID="95c848791a7642ff8c26794d43e410a8"
 export TEST_RUN="True"
 
@@ -144,8 +144,8 @@ To use AWS CLI, you may need to set the env variables:
 ```bash
 docker run -it --rm \
     -p 8080:8080 \
-    -e PREDICTIONS_STREAM_NAME="ride_predictions" \
-    -e RUN_ID="e1efc53e9bd149078b0c12aeaa6365df" \
+    -e PREDICTIONS_STREAM_NAME="ride-predictions" \
+    -e RUN_ID="95c848791a7642ff8c26794d43e410a8" \
     -e TEST_RUN="True" \
     -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
     -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
@@ -158,8 +158,8 @@ Alternatively, you can mount the `.aws` folder with your credentials to the `.aw
 ```bash
 docker run -it --rm \
     -p 8080:8080 \
-    -e PREDICTIONS_STREAM_NAME="ride_predictions" \
-    -e RUN_ID="e1efc53e9bd149078b0c12aeaa6365df" \
+    -e PREDICTIONS_STREAM_NAME="ride-predictions" \
+    -e RUN_ID="95c848791a7642ff8c26794d43e410a8" \
     -e TEST_RUN="True" \
     -v c:/Users/alexe/.aws:/root/.aws \
     stream-model-duration:v1
@@ -178,11 +178,12 @@ Logging in
 ```bash
 $(aws ecr get-login --no-include-email)
 ```
+Note: this part can be found in WebUI under the part `View push commands`
 
 Pushing 
 
 ```bash
-REMOTE_URI="387546586013.dkr.ecr.eu-west-1.amazonaws.com/duration-model"
+REMOTE_URI="012961706312.dkr.ecr.ap-southeast-1.amazonaws.com/duration-model"
 REMOTE_TAG="v1"
 REMOTE_IMAGE=${REMOTE_URI}:${REMOTE_TAG}
 
