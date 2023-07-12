@@ -75,7 +75,6 @@ class KinesisCallback:
             Data=json.dumps(prediction_event),
             PartitionKey=str(ride_id),
         )
-        return prediction_event
 
 
 def init(prediction_stream_name: str, run_id: str, test_run: bool):
