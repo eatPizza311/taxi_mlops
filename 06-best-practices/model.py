@@ -5,7 +5,6 @@ import boto3
 import mlflow
 
 
-# kinesis_client = boto3.client("kinesis")
 def base64_decode(encoded_data):
     decoded_data = base64.b64decode(encoded_data).decode("utf-8")
     ride_event = json.loads(decoded_data)
@@ -13,9 +12,10 @@ def base64_decode(encoded_data):
 
 
 class ModelService:
-    def __init__(self, model, model_version=None):
+    def __init__(self, model, model_version=None, callbacks=None):
         self.model = model
         self.model_version = model_version
+        self.callbacks = callbacks or []
 
     def prepare_features(self, ride):
         features = {}
@@ -47,12 +47,8 @@ class ModelService:
                 "prediction": {"ride_duration": prediction, "ride_id": ride_id},
             }
 
-            # if not TEST_RUN:
-            #     kinesis_client.put_record(
-            #         StreamName=PREDICTIONS_STREAM_NAME,
-            #         Data=json.dumps(prediction_event),
-            #         PartitionKey=str(ride_id),
-            #     )
+            for callback in self.callbacks:
+                callback(prediction_event)
 
             predictions_events.append(prediction_event)
 
@@ -67,7 +63,29 @@ def load_model(run_id: str):
     return model
 
 
+class KinesisCallback:
+    def __init__(self, kinesis_client, prediction_stream_name):
+        self.kinesis_client = kinesis_client
+        self.prediction_stream_name = prediction_stream_name
+
+    def put_record(self, prediction_event):
+        ride_id = prediction_event["prediction"]["ride_id"]
+        self.kinesis_client.put_record(
+            StreamName=self.prediction_stream_name,
+            Data=json.dumps(prediction_event),
+            PartitionKey=str(ride_id),
+        )
+        return prediction_event
+
+
 def init(prediction_stream_name: str, run_id: str, test_run: bool):
     model = load_model(run_id)
+
+    callbacks = []
+
+    if not test_run:
+        kinesis_client = boto3.client("kinesis")
+        kinesis_callback = KinesisCallback(kinesis_client, prediction_stream_name)
+        callbacks.append(kinesis_callback.put_record)
     model_service = ModelService(model)
     return model_service
