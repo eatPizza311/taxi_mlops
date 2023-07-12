@@ -5,6 +5,20 @@
 # Editors
 .vscode
 
+# python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+
+# Environments
+.python-version
+.env
+.venv
+env/
+venv/
+
 # MLflow
 *mlruns*
 *models*
