@@ -4,6 +4,7 @@ import json
 import boto3
 import mlflow
 
+
 # kinesis_client = boto3.client("kinesis")
 def base64_decode(encoded_data):
     decoded_data = base64.b64decode(encoded_data).decode("utf-8")
@@ -12,8 +13,9 @@ def base64_decode(encoded_data):
 
 
 class ModelService:
-    def __init__(self, model):
+    def __init__(self, model, model_version=None):
         self.model = model
+        self.model_version = model_version
 
     def prepare_features(self, ride):
         features = {}
@@ -41,7 +43,7 @@ class ModelService:
 
             prediction_event = {
                 "model": "ride_duration_prediction_model",
-                "version": "123",
+                "version": self.model_version,
                 "prediction": {"ride_duration": prediction, "ride_id": ride_id},
             }
 
