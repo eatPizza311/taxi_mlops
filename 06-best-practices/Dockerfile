@@ -9,5 +9,5 @@ COPY [ "Pipfile", "Pipfile.lock", "./" ]
 
 RUN pipenv install --system --deploy
 
-COPY [ "lambda_function.py", "./" ]
+COPY [ "lambda_function.py", "model.py", "./" ]
 
